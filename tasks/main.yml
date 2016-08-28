@@ -1,0 +1,24 @@
+---
+- name: Install Audit Pre Reqs - RedHat
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - "{{ redhat_packages }}"
+  when: "ansible_os_family | lower == 'redhat' and {{ enable_audit }}"
+
+- name: Install Audit Packages - Debian
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - "{{ debian_packages }}"
+  when: "ansible_os_family | lower == 'debian' and {{ enable_audit }}"
+
+- name: create rules-directory if it does not exist
+  file: path='/etc/audit/rules.d' owner=root group=root mode=0755 state=directory
+  when: "{{ enable_audit }}" 
+
+- name: create sane rules
+  template: src='audit.rules.j2' dest='/etc/audit/rules.d/audit.rules' owner=root group=root mode=0440
+  when: "{{ enable_audit }}"

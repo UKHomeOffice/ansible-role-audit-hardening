@@ -1,0 +1,10 @@
+---
+redhat_packages:
+  - audit
+  - audit-libs
+
+debian_packages:
+  - auditd
+
+enable_audit: true
+watch_modules: true
