@@ -4,17 +4,14 @@ galaxy_info:
   description: 'This Ansible playbook provides auditD hardening rules"
   company: "KEAO Solution Limited"
   license: MIT
-  min_ansible_version: '2'
+  min_ansible_version: 2
   platforms:
     - name: EL
       versions:
-        - 7
+      - 7
     - name: Ubuntu
       versions:
-        - xenial
-    - name: Debian
-      versions:
-        - jessie
+       - xenial
   galaxy_tags:
     - system
     - security
