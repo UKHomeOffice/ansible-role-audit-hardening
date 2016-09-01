@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: "Mark Olliver"
-  description: 'This Ansible playbook provides auditD hardening rules"
+  description: "This Ansible playbook provides auditD hardening rules"
   company: "KEAO Solution Limited"
   license: MIT
   min_ansible_version: 2
