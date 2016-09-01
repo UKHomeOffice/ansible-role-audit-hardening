@@ -1,7 +1,7 @@
 # Watch for loading and unloading Kernel modules
-<% if watch_modules %>
+{% if watch_modules %}
 -w /sbin/insmod -p x -k modules
 -w /sbin/rmmod -p x -k modules
 -w /sbin/modprobe -p x -k modules
 -a always,exit arch=b64 -S init_module -S delete_module -k modules
-<% endif %>
+{% endif %}
