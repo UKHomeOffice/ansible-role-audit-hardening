@@ -23,19 +23,19 @@
 
 - name: create rules-directory if it does not exist
   file: path='/etc/audit/rules' owner=root group=root mode=0755 state=directory
-  when: "ansible_os_family | lower == 'redhat' and {{ enable_audit }}" and ansible_distribution_version <= '6.8'
+  when: "ansible_os_family | lower == 'redhat' and {{ enable_audit }} and ansible_distribution_version <= '6.8'"
 
 - name: create sane rules
   template: src='audit.rules.j2' dest='/etc/audit/rules/audit.rules' owner=root group=root mode=0440
-  when: "ansible_os_family | lower == 'redhat' and {{ enable_audit }}" and ansible_distribution_version <= '6.8'
+  when: "ansible_os_family | lower == 'redhat' and {{ enable_audit }} and ansible_distribution_version <= '6.8'"
 
 - name: create rules-directory if it does not exist
   file: path='/etc/audit/rules.d' owner=root group=root mode=0755 state=directory
-  when: "ansible_os_family | lower == 'redhat' and {{ enable_audit }}" and ansible_distribution_version >= '7'
+  when: "ansible_os_family | lower == 'redhat' and {{ enable_audit }} and ansible_distribution_version >= '7'"
 
 - name: create sane rules
   template: src='audit.rules.j2' dest='/etc/audit/rules.d/audit.rules' owner=root group=root mode=0440
-  when: "ansible_os_family | lower == 'redhat' and {{ enable_audit }}" and ansible_distribution_version >= '7'
+  when: "ansible_os_family | lower == 'redhat' and {{ enable_audit }} and ansible_distribution_version >= '7'"
 
 - name: create sane rules
   template: src='audit.rules.j2' dest='/etc/audit/audit.rules' owner=root group=root mode=0440
