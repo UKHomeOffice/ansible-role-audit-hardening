@@ -45,8 +45,13 @@
   template: src='audit.rules.debian.j2' dest='/etc/audit/rules.d/audit.rules' owner=root group=root mode=0440
   when: "ansible_os_family | lower == 'debian' and {{ enable_audit }}"
 
+- name: get audit.rules stat
+  stat: path=/etc/audit/audit.rules
+  register: audit_rules_stat
+
 - name: remove any audit.rules file if present by OS
   file: dest=/etc/audit/audit.rules state=absent
+  when: "{{ audit_rules_stat.stat.islnk is not defined }}"
 
 - name: create audit simlink
   file: src=/etc/audit/rules.d/audit.rules dest=/etc/audit/audit.rules owner=root group=root state=link
