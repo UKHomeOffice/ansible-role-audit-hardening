@@ -38,12 +38,15 @@
   when: "ansible_os_family | lower == 'debian' and {{ enable_audit }}"
 
 - name: create sane rules
-  template: src='audit.rules.j2' dest='/etc/audit/rules.d/audit.rules' owner=root group=root mode=0440
+  template: src='audit.rules.redhat.j2' dest='/etc/audit/rules.d/audit.rules' owner=root group=root mode=0440
   when: "ansible_os_family | lower == 'redhat' and {{ enable_audit }} and ansible_distribution_version >= '7'"
 
 - name: create sane rules
-  template: src='audit.rules.j2' dest='/etc/audit/rules.d/audit.rules' owner=root group=root mode=0440
+  template: src='audit.rules.debian.j2' dest='/etc/audit/rules.d/audit.rules' owner=root group=root mode=0440
   when: "ansible_os_family | lower == 'debian' and {{ enable_audit }}"
+
+- name: create audit simlink
+  file: src=/etc/audit/rules.d/audit.rules dest=/etc/audit/audit.rules owner=root group=root state=link
 
 - name: Make sure auditd server is running
   service:
