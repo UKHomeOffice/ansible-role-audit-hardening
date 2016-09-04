@@ -8,3 +8,8 @@ debian_packages:
 
 enable_audit: true
 watch_modules: true
+
+
+num_logs: 10
+max_log_file: 100
+
