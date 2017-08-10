@@ -57,3 +57,4 @@
     name: auditd
     state: started
     enabled: yes
+  tags: usb
